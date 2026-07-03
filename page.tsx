@@ -1,1 +1,0 @@
-export default function Home(){return <main><h1>G-Connect</h1><p>Starter project.</p></main>}
