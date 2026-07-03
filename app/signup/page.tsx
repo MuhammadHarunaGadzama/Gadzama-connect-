@@ -1,4 +1,31 @@
+"use client";
+
+import { useState } from "react";
+import { supabase } from "../../lib/supabase";
+
 export default function SignupPage() {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSignup() {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
+    });
+
+    if (error) {
+      alert(error.message);
+    } else {
+      alert("Account created successfully! Please check your email to verify your account.");
+    }
+  }
+
   return (
     <main
       style={{
@@ -18,18 +45,15 @@ export default function SignupPage() {
           boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
         }}
       >
-        <h1
-          style={{
-            textAlign: "center",
-            color: "#16a34a",
-          }}
-        >
+        <h1 style={{ textAlign: "center", color: "#16a34a" }}>
           Create Account
         </h1>
 
         <input
           type="text"
           placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
           style={{
             width: "100%",
             padding: "12px",
@@ -40,6 +64,8 @@ export default function SignupPage() {
         <input
           type="email"
           placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             width: "100%",
             padding: "12px",
@@ -50,6 +76,8 @@ export default function SignupPage() {
         <input
           type="password"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           style={{
             width: "100%",
             padding: "12px",
@@ -58,6 +86,7 @@ export default function SignupPage() {
         />
 
         <button
+          onClick={handleSignup}
           style={{
             width: "100%",
             padding: "12px",
@@ -66,6 +95,7 @@ export default function SignupPage() {
             color: "white",
             border: "none",
             borderRadius: "8px",
+            cursor: "pointer",
           }}
         >
           Create Account
@@ -73,4 +103,4 @@ export default function SignupPage() {
       </div>
     </main>
   );
-}
+  }
