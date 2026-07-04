@@ -1,69 +1,113 @@
-import Navbar from "../../components/Navbar";
-import Sidebar from "../../components/Sidebar";
-import Footer from "../../components/Footer";
-
 export default function DashboardPage() {
   return (
-    <>
-      <Navbar />
-
-      <div
+    <main
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        background: "#f5f5f5",
+      }}
+    >
+      {/* Sidebar */}
+      <aside
         style={{
-          display: "flex",
-          minHeight: "80vh",
+          width: "250px",
+          background: "#16a34a",
+          color: "white",
+          padding: "25px",
         }}
       >
-        <Sidebar />
+        <h2>G-Connect</h2>
 
-        <main
+        <hr />
+
+        <p style={{ marginTop: "25px" }}>🏠 Dashboard</p>
+        <p>👤 Profile</p>
+        <p>💬 Chats</p>
+        <p>🎥 Reels</p>
+        <p>🎓 Scholarships</p>
+        <p>💼 Jobs</p>
+        <p>⚙ Settings</p>
+      </aside>
+
+      {/* Main Content */}
+      <section
+        style={{
+          flex: 1,
+          padding: "40px",
+        }}
+      >
+        <h1>Welcome to G-Connect 👋</h1>
+
+        <p>
+          Connect with students, creators and professionals around the world.
+        </p>
+
+        <div
           style={{
-            flex: 1,
-            padding: "30px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))",
+            gap: "20px",
+            marginTop: "35px",
           }}
         >
-          <h1>Welcome to G-Connect</h1>
-
-          <p>
-            This is your dashboard.
-          </p>
+          <div
+            style={{
+              background: "white",
+              padding: "25px",
+              borderRadius: "12px",
+            }}
+          >
+            <h3>👥 Friends</h3>
+            <p>0 Friends</p>
+          </div>
 
           <div
             style={{
-              marginTop: "30px",
-              padding: "20px",
-              background: "#f3f4f6",
-              borderRadius: "10px",
+              background: "white",
+              padding: "25px",
+              borderRadius: "12px",
             }}
           >
-            <h2>Create your first post</h2>
-
-            <textarea
-              placeholder="What's on your mind?"
-              style={{
-                width: "100%",
-                height: "120px",
-                marginTop: "15px",
-                padding: "10px",
-              }}
-            />
-
-            <button
-              style={{
-                marginTop: "15px",
-                padding: "12px 20px",
-                background: "#16a34a",
-                color: "white",
-                border: "none",
-                borderRadius: "8px",
-              }}
-            >
-              Post
-            </button>
+            <h3>💬 Messages</h3>
+            <p>No new messages</p>
           </div>
-        </main>
-      </div>
 
-      <Footer />
-    </>
+          <div
+            style={{
+              background: "white",
+              padding: "25px",
+              borderRadius: "12px",
+            }}
+          >
+            <h3>🎥 Reels</h3>
+            <p>Watch trending videos</p>
+          </div>
+
+          <div
+            style={{
+              background: "white",
+              padding: "25px",
+              borderRadius: "12px",
+            }}
+          >
+            <h3>🎓 Opportunities</h3>
+            <p>Latest scholarships & jobs</p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            marginTop: "40px",
+            background: "white",
+            padding: "25px",
+            borderRadius: "12px",
+          }}
+        >
+          <h2>Recent Activity</h2>
+
+          <p>No activity yet.</p>
+        </div>
+      </section>
+    </main>
   );
 }
