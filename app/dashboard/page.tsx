@@ -1,4 +1,5 @@
 import UserInfo from "./UserInfo";
+import LogoutButton from "./LogoutButton";
 
 export default function DashboardPage() {
   return (
@@ -12,23 +13,25 @@ export default function DashboardPage() {
       {/* Sidebar */}
       <aside
         style={{
-          width: "250px",
+          width: "260px",
           background: "#16a34a",
           color: "white",
           padding: "25px",
         }}
       >
-        <h2>G-Connect</h2>
+        <h2>🌍 G-Connect</h2>
 
-        <hr />
+        <hr style={{ margin: "20px 0" }} />
 
-        <p style={{ marginTop: "25px" }}>🏠 Dashboard</p>
+        <p>🏠 Dashboard</p>
         <p>👤 Profile</p>
         <p>💬 Chats</p>
         <p>🎥 Reels</p>
         <p>🎓 Scholarships</p>
         <p>💼 Jobs</p>
         <p>⚙️ Settings</p>
+
+        <LogoutButton />
       </aside>
 
       {/* Main Content */}
@@ -43,7 +46,8 @@ export default function DashboardPage() {
         <h1>Welcome to G-Connect 👋</h1>
 
         <p>
-          Connect with students, creators and professionals around the world.
+          Connect with students, creators, professionals and innovators around
+          the world.
         </p>
 
         <div
@@ -59,6 +63,7 @@ export default function DashboardPage() {
               background: "white",
               padding: "25px",
               borderRadius: "12px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           >
             <h3>👥 Friends</h3>
@@ -70,6 +75,7 @@ export default function DashboardPage() {
               background: "white",
               padding: "25px",
               borderRadius: "12px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           >
             <h3>💬 Messages</h3>
@@ -81,6 +87,7 @@ export default function DashboardPage() {
               background: "white",
               padding: "25px",
               borderRadius: "12px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           >
             <h3>🎥 Reels</h3>
@@ -92,6 +99,7 @@ export default function DashboardPage() {
               background: "white",
               padding: "25px",
               borderRadius: "12px",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           >
             <h3>🎓 Opportunities</h3>
@@ -105,13 +113,14 @@ export default function DashboardPage() {
             background: "white",
             padding: "25px",
             borderRadius: "12px",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
           }}
         >
-          <h2>Recent Activity</h2>
+          <h2>📢 Recent Activity</h2>
 
           <p>No activity yet.</p>
         </div>
       </section>
     </main>
   );
-                }
+}
