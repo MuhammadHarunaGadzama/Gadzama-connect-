@@ -1,41 +1,92 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabase";
+
+type Post = {
+  id: string;
+  content: string;
+  user_email: string;
+  created_at: string;
+};
+
 export default function Feed() {
+  const [content, setContent] = useState("");
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  async function loadPosts() {
+    const { data, error } = await supabase
+      .from("posts")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      setPosts(data);
+    }
+  }
+
+  async function createPost() {
+    if (!content.trim()) return;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      alert("Please login first.");
+      return;
+    }
+
+    const { error } = await supabase.from("posts").insert({
+      content: content,
+      user_email: user.email!,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    setContent("");
+    loadPosts();
+  }
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
   return (
     <main
       style={{
         flex: 1,
         padding: "25px",
         background: "#f5f5f5",
-        overflowY: "auto",
       }}
     >
-      {/* Create Post */}
       <div
         style={{
           background: "white",
           padding: "20px",
           borderRadius: "12px",
           marginBottom: "20px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
         }}
       >
-        <h2>Create a Post</h2>
+        <h2>Create Post</h2>
 
         <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="What's on your mind?"
           style={{
             width: "100%",
             height: "100px",
-            marginTop: "15px",
             padding: "10px",
-            borderRadius: "8px",
-            border: "1px solid #ddd",
-            resize: "none",
+            marginTop: "10px",
           }}
         />
 
         <button
+          onClick={createPost}
           style={{
             marginTop: "15px",
             background: "#16a34a",
@@ -50,33 +101,25 @@ export default function Feed() {
         </button>
       </div>
 
-      {/* Demo Post */}
-      <div
-        style={{
-          background: "white",
-          padding: "20px",
-          borderRadius: "12px",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-        }}
-      >
-        <h3>🌍 Welcome to G-Connect</h3>
-
-        <p style={{ marginTop: "10px" }}>
-          This is where posts from your friends will appear.
-        </p>
-
+      {posts.map((post) => (
         <div
+          key={post.id}
           style={{
-            display: "flex",
-            gap: "25px",
-            marginTop: "20px",
+            background: "white",
+            padding: "20px",
+            borderRadius: "12px",
+            marginBottom: "15px",
           }}
         >
-          <span>❤️ Like</span>
-          <span>💬 Comment</span>
-          <span>📤 Share</span>
+          <h4>{post.user_email}</h4>
+
+          <p>{post.content}</p>
+
+          <small>
+            {new Date(post.created_at).toLocaleString()}
+          </small>
         </div>
-      </div>
+      ))}
     </main>
   );
-}
+            }
