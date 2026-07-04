@@ -1,3 +1,5 @@
+import UserInfo from "./UserInfo";
+
 export default function DashboardPage() {
   return (
     <main
@@ -26,7 +28,7 @@ export default function DashboardPage() {
         <p>🎥 Reels</p>
         <p>🎓 Scholarships</p>
         <p>💼 Jobs</p>
-        <p>⚙ Settings</p>
+        <p>⚙️ Settings</p>
       </aside>
 
       {/* Main Content */}
@@ -36,6 +38,8 @@ export default function DashboardPage() {
           padding: "40px",
         }}
       >
+        <UserInfo />
+
         <h1>Welcome to G-Connect 👋</h1>
 
         <p>
@@ -110,4 +114,4 @@ export default function DashboardPage() {
       </section>
     </main>
   );
-}
+                }
